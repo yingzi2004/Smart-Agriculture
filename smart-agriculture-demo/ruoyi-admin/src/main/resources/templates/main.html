@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧农业 Demo</title>
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link href="../static/css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" rel="stylesheet"/>
+    <link href="../static/css/style.min.css" th:href="@{/css/style.min.css}" rel="stylesheet"/>
+    <style>
+        .demo-panel { margin: 24px; }
+        .demo-title { margin-bottom: 12px; font-weight: 600; color: #2f6336; }
+        .demo-card { min-height: 150px; border-top: 3px solid #2f8f46; }
+        .api-code { padding: 10px 12px; background: #f7f9fb; border: 1px solid #e5e9ef; border-radius: 4px; font-family: Consolas, monospace; }
+    </style>
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content demo-panel">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox demo-card">
+                    <div class="ibox-title">
+                        <h5>智慧农业管理系统 Demo</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h2 class="demo-title">当前阶段：后端接口骨架</h2>
+                        <p>
+                            本 Demo 基于若依单体版搭建，当前不开发具体业务页面，也不接入真实硬件。
+                            现阶段目标是先保留基础后台能力，并提供智慧农业后端占位接口，方便后续逐步扩展作物管理、环境数据、告警、AI 助手等模块。
+                        </p>
+                        <p><b>框架版本：</b><span>v[[${version}]]</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="ibox demo-card">
+                    <div class="ibox-title"><h5>已保留</h5></div>
+                    <div class="ibox-content">
+                        <ul>
+                            <li>登录与后台基础框架</li>
+                            <li>权限、菜单、用户等若依基础能力</li>
+                            <li>Swagger 接口文档</li>
+                            <li>智慧农业占位接口</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox demo-card">
+                    <div class="ibox-title"><h5>暂不实现</h5></div>
+                    <div class="ibox-content">
+                        <ul>
+                            <li>真实传感器接入</li>
+                            <li>水泵、风机等设备控制</li>
+                            <li>完整 CRUD 业务模块</li>
+                            <li>AI 识别与大模型问答</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="ibox demo-card">
+                    <div class="ibox-title"><h5>占位接口</h5></div>
+                    <div class="ibox-content">
+                        <div class="api-code">GET /agriculture/api/health</div>
+                        <br>
+                        <div class="api-code">GET /agriculture/api/info</div>
+                        <br>
+                        <div class="api-code">GET /agriculture/api/overview</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
