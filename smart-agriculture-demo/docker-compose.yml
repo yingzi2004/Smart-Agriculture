@@ -1,0 +1,57 @@
+# ==========================================
+# 智慧农业管理系统 — Docker Compose 一键部署
+# 前置条件：安装 Docker Desktop
+# 启动：docker-compose up -d
+# 停止：docker-compose down
+# 访问：http://localhost:8080 （admin / admin123）
+# ==========================================
+
+version: "3.8"
+
+services:
+  # ---------- MySQL 8.0 ----------
+  mysql:
+    image: mysql:8.0
+    container_name: smart-agriculture-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: smart123456
+      MYSQL_DATABASE: smart_agriculture_demo
+      TZ: Asia/Shanghai
+    ports:
+      - "3307:3306" # 映射到宿主机 3307，避免与本机 MySQL 冲突
+    volumes:
+      # 自动初始化 SQL（按文件名排序执行）
+      - ./sql/ry_20260319.sql:/docker-entrypoint-initdb.d/01-ry.sql
+      - ./sql/quartz.sql:/docker-entrypoint-initdb.d/02-quartz.sql
+      # MySQL 数据持久化
+      - mysql-data:/var/lib/mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_general_ci
+      - --default-time-zone=+08:00
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-psmart123456"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+  # ---------- Spring Boot 后端 ----------
+  app:
+    build: .
+    container_name: smart-agriculture-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    # 通过命令行参数覆盖数据库连接（指向 Docker 内的 MySQL 容器）
+    command:
+      - --spring.datasource.druid.master.url=jdbc:mysql://mysql:3306/smart_agriculture_demo?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&serverTimezone=GMT%2B8&allowPublicKeyRetrieval=true
+      - --spring.datasource.druid.master.username=root
+      - --spring.datasource.druid.master.password=smart123456
+
+volumes:
+  mysql-data:

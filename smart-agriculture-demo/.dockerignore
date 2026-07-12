@@ -1,0 +1,9 @@
+# Docker 构建忽略文件
+target/*
+!ruoyi-admin/target/ruoyi-admin.jar
+logs/
+.idea/
+*.iml
+.git/
+.gitignore
+node_modules/

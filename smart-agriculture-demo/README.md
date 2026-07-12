@@ -53,6 +53,30 @@ GET /agriculture/api/modules
 
 ## 运行方式
 
+### 方式一：Docker Compose 一键部署（推荐 🐳）
+
+> 别人电脑上只需安装 **Docker Desktop**，无需装 Java、Maven、MySQL。
+
+```bash
+# 1. 先打包 jar（首次需要，之后不用）
+mvn -pl ruoyi-admin -am -DskipTests package
+
+# 2. 一键启动（MySQL + 后端 同时启动）
+docker compose up -d
+
+# 3. 浏览器访问
+# http://localhost:8080
+# 账号：admin / admin123
+
+# 停止
+docker compose down
+
+# 彻底清除（含数据库数据）
+docker compose down -v
+```
+
+### 方式二：手动部署（开发调试用）
+
 1. 启动 Demo 专用 MySQL：
 
 ```powershell
@@ -81,12 +105,6 @@ mysql --host=127.0.0.1 --port=3307 --user=root --password=smart123456 --default-
 ruoyi-admin/src/main/resources/application-druid.yml
 ```
 
-默认数据库名：
-
-```text
-smart_agriculture_demo
-```
-
 默认连接信息：
 
 ```text
@@ -94,6 +112,7 @@ host: 127.0.0.1
 port: 3307
 username: root
 password: smart123456
+database: smart_agriculture_demo
 ```
 
 4. 启动后端：
