@@ -36,6 +36,13 @@ public class SmartAgricultureApiController
         return AjaxResult.success(demoService.health());
     }
 
+    @ApiOperation("Branch test")
+    @GetMapping("/branch-test")
+    public AjaxResult branchTest()
+    {
+        return AjaxResult.success(demoService.branchTest());
+    }
+
     @ApiOperation("智能总览")
     @GetMapping("/dashboard")
     public AjaxResult dashboard()

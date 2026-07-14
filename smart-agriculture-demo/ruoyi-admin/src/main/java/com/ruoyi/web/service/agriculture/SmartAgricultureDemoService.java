@@ -21,6 +21,15 @@ public class SmartAgricultureDemoService
         return mapOf("status", "UP", "project", "基于 LangChain 的智慧农业大棚", "stage", "frontend-backend-skeleton");
     }
 
+    public Map<String, Object> branchTest()
+    {
+        return mapOf(
+                "branch", "test",
+                "message", "GitHub branch workflow test",
+                "endpoint", "/agriculture/api/branch-test",
+                "status", "ready");
+    }
+
     public Map<String, Object> dashboard()
     {
         return mapOf(
