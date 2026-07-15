@@ -30,6 +30,16 @@ public class SmartAgricultureDemoService
                 "status", "ready");
     }
 
+    public Map<String, Object> branchDemo()
+    {
+        return mapOf(
+                "branch", "demo/branch-workflow",
+                "purpose", "Show how a feature branch changes code before merging",
+                "reviewPoints", Arrays.asList("controller mapping", "service response", "no database change"),
+                "verifyUrl", "/agriculture/api/branch-demo",
+                "result", "visible only after this branch is built and deployed");
+    }
+
     public Map<String, Object> dashboard()
     {
         return mapOf(
